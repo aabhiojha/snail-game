@@ -18,7 +18,7 @@ score_surface = test_font.render("My game", False, "Black")
 score_rectangle = score_surface.get_rect(center=(400, 50))
 
 snail_surface = pygame.image.load("graphics/snail/snail1.png").convert_alpha()
-snail_rectange = snail_surface.get_rect(bottomright=(600, 300))
+snail_rectangle = snail_surface.get_rect(bottomright=(600, 300))
 
 player_surf = pygame.image.load("graphics\Player\player_walk_1.png").convert_alpha()
 player_rect = player_surf.get_rect(midbottom=(80, 300))
@@ -34,26 +34,31 @@ while running:
     screen.blit(sky_surface, (0, 0))
     screen.blit(ground_surface, (0, 300))
 
+    # pygame.draw.line(screen, "Red", (800, 0), pygame.mouse.get_pos(), 4)
+    pygame.draw.ellipse(screen, "Brown", pygame.Rect(left))
+
     # text score
+    pygame.draw.rect(screen, "Pink", score_rectangle)
+    pygame.draw.rect(screen, "Pink", score_rectangle, 10)
     screen.blit(score_surface, score_rectangle)
     # text_center_coordinates =
 
     # logic for updating the snail img
-    snail_rectange.left -= 4
-    if snail_rectange.right < -100:
-        snail_rectange.left = 800
+    snail_rectangle.left -= 4
+    if snail_rectangle.right < -100:
+        snail_rectangle.left = 800
 
-    screen.blit(snail_surface, snail_rectange)
+    screen.blit(snail_surface, snail_rectangle)
 
     # Player image
     screen.blit(player_surf, player_rect)
 
-    # if player_rect.collidepoint(snail_rectange):
+    # if player_rect.collidepoint(snail_rectangle):
     #     print("collision")
 
-    mouse_pos = pygame.mouse.get_pos()
-    if player_rect.collidepoint(mouse_pos):
-        print(pygame.mouse.get_pressed())
+    # mouse_pos = pygame.mouse.get_pos()
+    # if player_rect.collidepoint(mouse_pos):
+    #     print(pygame.mouse.get_pressed())
 
     pygame.display.update()
     clock.tick(60)
